@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <script src="./../static/manipulateContainer.js"></script>
+        <script src="./../static/getDockerData.js"></script>
+    <head>
+
+    <body>
+        <input type='text' name='textInput' id='imageName'>
+        <button onclick="manipulateContainer('createContainer')">Spin up container</button>
+        <button onclick="manipulateContainer('stopContainer')">Stop container</button>
+        <button onclick="getDockerData('getAllContainers')">GetAllData</button>
+        {{ world }}
+    </body>
+</html>
