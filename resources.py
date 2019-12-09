@@ -19,7 +19,7 @@ class CreateContainer(Resource):
     def post(self):
         imageName = request.get_json(True)
         if imageName['name'] != '':
-            containerStatus = python_docker_methods.runDockerContainer(self.dockerClient, imageName['name'])
+            containerStatus = python_docker_methods.runDockerContainer(self.dockerClient, imageName['name'], True)
             print(containerStatus, file=sys.stderr)
             return {"status" : 200}
             ##return { "\"" + imageName['name'] + "\"" + ":" + "\"" + str(containerStatus) + "\"" }
@@ -36,11 +36,46 @@ class StopContainer(Resource):
         imageName = request.get_json(True)
         if imageName['name'] != '':
             ## ---- stop container code here ---- name or id
-            python_docker_methods.closeDockerContainer(self.dockerClient, imageName['name'])
-            return 'Stopping container container ' + imageName['name']
+            print("REMOVING CONTAINER", file=sys.stderr)
+            dockerConnection = python_docker_methods.getDockerContainer(self.dockerClient, imageName['name'])
+            python_docker_methods.stopDockerContainer(dockerConnection)
+            return {"Stopping container container " : imageName['name'] }
         else:
             return 'Image Name does not exist'
 
+## ---- remove a container
+class RemoveContainer(Resource):
+    def __init__(self, **kwargs):
+        self.dockerClient = kwargs['dockerClient']
+    def get(self):
+        return ''
+    def post(self):
+        imageName = request.get_json(True)
+        if imageName['name'] != '':
+            ## ---- stop container code here ---- name or id
+            print("REMOVING CONTAINER", file=sys.stderr)
+            dockerConnection = python_docker_methods.getDockerContainer(self.dockerClient, imageName['name'])
+            python_docker_methods.removeDockerContainer(dockerConnection)
+            return {"Removing container container " : imageName['name'] }
+        else:
+            return 'Image Name does not exist'
+
+## ---- start a container
+class StartContainer(Resource):
+    def __init__(self, **kwargs):
+        self.dockerClient = kwargs['dockerClient']
+    def get(self):
+        return ''
+    def post(self):
+        imageName = request.get_json(True)
+        if imageName['name'] != '':
+            ## ---- stop container code here ---- name or id
+            print("Starting CONTAINER", file=sys.stderr)
+            dockerConnection = python_docker_methods.getDockerContainer(self.dockerClient, imageName['name'])
+            python_docker_methods.startDockerContainer(dockerConnection)
+            return {"Starting  container " : imageName['name'] }
+        else:
+            return 'Image Name does not exist'
 ##! ---- Container manipulation classes
 
 
@@ -56,19 +91,40 @@ class GetAllContainers(Resource):
         containerIds = python_docker_methods.listDockerContainer(self.dockerClient)
         containerNameIdPair = "{"
         for item in range(len(containerIds)):
-            dockerContainer = python_docker_methods.connectToDockerContainer(self.dockerClient, parser.parse_container_id(containerIds[item]))
+            dockerContainer = python_docker_methods.getDockerContainer(self.dockerClient, parser.parse_container_id(containerIds[item]))
             containerNames = python_docker_methods.getDockerContainerName(dockerContainer)
             containerNameIdPair = containerNameIdPair + "\"" + containerNames + "\"" + ":" + "\"" + parser.parse_container_id(containerIds[item]) + "\"" + ","
         containerNameIdPair = containerNameIdPair.rstrip(',') + "}"
         print(containerNameIdPair, file= sys.stderr)
         return str(containerNameIdPair).replace("/","")
 
+
+##TODO ---- Need to implement separate ajax request to handle get info requests that containe json payloads
+## ---- get a list of processes running inside this container
+class GetContainerProcesses(Resource):
+    def __init__(self, **kwargs):
+        self.dockerClient = kwargs['dockerClient']
+    def post(self):
+        imageName = request.get_json(True)
+        if imageName['name'] != '':
+            dockerConnection = python_docker_methods.getDockerContainer(self.dockerClient, imageName['name'])
+            containerProcesses = python_docker_methods.getDockerProcesses(dockerConnection)
+            return {"Running Processes " : containerProcesses }
+        else:
+            return 'Image Name does not exist'
+        return ''
 ##! ---- Container data classes
 
 
 
 ##! ---- Image manipulation and data retrieval classes
 ##! ---- used to retieve images, get the names, remove images
+## ---- get stats of running container
+class GetContainerStats(Resource):
+    def __init__(self, **kwargs):
+        self.dockerClient = kwargs['dockerClient']
+    def get(self):
+        return ''
 
 ## ---- get a new image from the repo
 class GetNewImage(Resource):

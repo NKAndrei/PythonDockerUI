@@ -6,8 +6,8 @@ function callbackFunction(response) {
 //TODO ---- and add a timer to be able to refresh the container data automatically
 // ---- get name, id, status, a
 function getDockerData(dataEndpoint) {
-    urlAddress = "http://127.0.0.1:5000/" + dataEndpoint;
-    xhttp = new XMLHttpRequest();
+    var urlAddress = "http://127.0.0.1:5000/" + dataEndpoint;
+    var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             callbackFunction(xhttp.responseText);

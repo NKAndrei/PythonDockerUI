@@ -8,7 +8,12 @@
         <input type='text' name='textInput' id='imageName'>
         <button onclick="manipulateContainer('createContainer')">Spin up container</button>
         <button onclick="manipulateContainer('stopContainer')">Stop container</button>
-        <button onclick="getDockerData('getAllContainers')">GetAllData</button>
+        <button onclick="manipulateContainer('removeContainer')">Remove container</button>
+        <button onclick="manipulateContainer('startContainer')">Start container</button>
+        <button onclick="getDockerData('getAllContainers')">Get all data</button>
+        <button onclick="manipulateContainer('getContainerProcesses')">Get container processes</button>
+
+
         {{ world }}
     </body>
 </html>

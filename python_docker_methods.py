@@ -47,21 +47,29 @@ def listDockerContainer(dockerClient):
     containerList = dockerClient.containers.list(all=True)
     return containerList
 
-def getDockerContainers(dockerClient, containerList): #? -- how should we get them --- by id by name by order number
-    return ""                                           #TODO -- need to implement
-
-def getDockerContainerName(containerConnection): #? -- how should we get them --- by id by name by order number
+def getDockerContainerName(containerConnection):
     name = containerConnection.attrs['Name']
     return name                                           #TODO -- need to implement
     
-def runDockerContainer(dockerClient, dockerImageName):
-    containerLogs = dockerClient.containers.run(dockerImageName)
-    return containerLogs
+def runDockerContainer(dockerClient, dockerImageName, detachContainer, commands=None):
+    if commands != '':
+        container = dockerClient.containers.run(dockerImageName, detach=detachContainer, command=commands)
+        return container
+    else:
+        container = dockerClient.containers.run(dockerImageName, detach=detachContainer)
+        return container
 
-def closeDockerContainer(dockerClient, containerID): #? ---- should it return a message
-     return dockerClient.api.remove_container(containerID)
+##TODO ---- the start/stop/remove container methods can be grouped into one with conditionals
+def startDockerContainer(containerConnection):
+     return containerConnection.start()
 
-def connectToDockerContainer(dockerClient, containerID):
+def stopDockerContainer(containerConnection):
+     return containerConnection.stop()
+
+def removeDockerContainer(containerConnection):
+     return containerConnection.remove()
+
+def getDockerContainer(dockerClient, containerID):
     containerObject = dockerClient.containers.get(containerID)
     return containerObject
 
@@ -69,3 +77,10 @@ def getDockerContainerInfo(containerConnection):
     containerInfo = containerConnection.attrs
     return containerInfo
 
+def executeCommandInContainer(container, command):
+    response = container.exec_run(command, stream=False, demux=False)
+    return response.output
+
+def getDockerProcesses(containerConnection):
+    dockerProcesses = containerConnection.top()
+    return dockerProcesses
