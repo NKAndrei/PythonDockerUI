@@ -13,8 +13,17 @@
         <button onclick="manipulateContainer('stopContainer')">Stop container</button>
         <button onclick="manipulateContainer('removeContainer')">Remove container</button>
         <button onclick="manipulateContainer('startContainer')">Start container</button>
+        <button onclick="manipulateContainer('restartContainer')">Restart container</button>
+        <br>
         <button onclick="getDockerData('getAllContainers')">Get all data</button>
         <button onclick="manipulateContainer('getContainerProcesses')">Get container processes</button>
+        <button onclick="manipulateContainer('getContainerLogs')">Get container Logs</button>
+        <button onclick="manipulateContainer('getContainerStats')">Get container Stats</button>
+        <br>
+        <input type='text' name='textInput' id='containerProcess'>
+        <button onclick="getDockerProcess('getProcessStatus')">Get process status</button>
+
+
 
 
         {{ world }}

@@ -61,13 +61,20 @@ def runDockerContainer(dockerClient, dockerImageName, detachContainer, commands=
 
 ##TODO ---- the start/stop/remove container methods can be grouped into one with conditionals
 def startDockerContainer(containerConnection):
-     return containerConnection.start()
+    return containerConnection.start()
 
 def stopDockerContainer(containerConnection):
-     return containerConnection.stop()
+    return containerConnection.stop()
 
 def removeDockerContainer(containerConnection):
-     return containerConnection.remove()
+    return containerConnection.remove()
+
+def restartDockerContainer(containerConnection, time=None):
+    if time is None:
+        containerRestart = containerConnection.restart()
+    else:
+        containerRestart = containerConnection.restart(time=time)
+    return containerRestart
 
 def getDockerContainer(dockerClient, containerID):
     containerObject = dockerClient.containers.get(containerID)
@@ -77,10 +84,21 @@ def getDockerContainerInfo(containerConnection):
     containerInfo = containerConnection.attrs
     return containerInfo
 
-def executeCommandInContainer(container, command):
-    response = container.exec_run(command, stream=False, demux=False)
+def executeCommandInContainer(containerConnection, command):
+    response = containerConnection.exec_run(command, stream=False, demux=False)
     return response.output
 
 def getDockerProcesses(containerConnection):
     dockerProcesses = containerConnection.top()
     return dockerProcesses
+
+def getDockerLogs(containerConnection):
+    dockerLogs = containerConnection.logs()
+    return dockerLogs
+
+def getDockerStats(containerConnection, stream=None):
+    if stream is None:
+        dockerStats = containerConnection.stats(stream=False)
+    else:
+        dockerStats = containerConnection.stats(stream = stream)
+    return dockerStats

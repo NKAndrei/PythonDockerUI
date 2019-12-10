@@ -7,7 +7,8 @@ pp = pprint.PrettyPrinter(indent=4)
 ## ---- random terminal commands for testing purposes
 terminalCommands()
 
-## ---- pull and list the downloaded docker image
+## ---- pull and list the downloaded docker image##TODO ---- need to define the following methods
+
 dockerClient = getDockerClient()
 dockerImages = listDockerImages(dockerClient)
 print(dockerImages)
@@ -49,10 +50,14 @@ print('ID ' + containerConnection.attrs['Name'])
 print("PRINTING CONTAINER ATTRIBUTES")
 
 print("PRINTING CONTAINER LOGS")
-print(containerConnection.logs())
+##print(containerConnection.logs())
 print("PRINTING CONTAINER LOGS")
 
-
+print("EXECUTING COMMAND")
+cmd = '/bin/sh -c "echo hello stdout ; echo hello stderr >&2"'
+containerCommandExecution = executeCommandInContainer(containerConnection, cmd)
+print(containerCommandExecution)
+print("EXECUTING COMMAND")
 ## ---- stop, remove and check if the docker container has been removed
 stopContainer = stopDockerContainer(containerConnection)
 removeContainer = removeDockerContainer(containerConnection)
