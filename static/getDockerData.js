@@ -1,5 +1,7 @@
 function callbackFunction(response) {
-    console.log(response)
+    jsonResponseFromApi = response
+    parseAPIResponse() // ---- added 
+        //console.log(response)
     return response;
 }
 //TODO ---- will need to split this asynchronous request into multiple parts

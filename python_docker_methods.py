@@ -2,7 +2,7 @@ import subprocess
 import os
 import docker
 
-
+##TODO ---- refactor or create extra docker methos that are executed through subprocess and os
 
 #! -- a series of commmands defined for testing purposes
 def terminalCommands(): 
@@ -102,3 +102,51 @@ def getDockerStats(containerConnection, stream=None):
     else:
         dockerStats = containerConnection.stats(stream = stream)
     return dockerStats
+
+##! ---- Docker commands with Python os and subprocess
+def getDockerClientOS():
+    return ''
+
+def listDockerImagesOS():
+    dockerCommand3 = subprocess.run(["docker", "images"], stdout=subprocess.PIPE)
+    print(dockerCommand3.stdout.decode())
+    return dockerCommand3.stdout.decode()
+
+def listDockerContainerOS():
+    return ''
+
+def getDockerContainerNameOS():
+    return ''
+    
+def runDockerContainerOS():
+    return ''
+
+def startDockerContainerOS():
+    return ''
+
+def stopDockerContainerOS():
+    return ''
+
+def removeDockerContainerOS():
+    return ''
+
+def restartDockerContainerOS():
+    return ''
+
+def getDockerContainerOS():
+    return ''
+
+def getDockerContainerInfoOS():
+    return ''
+
+def executeCommandInContainerOS():
+    return ''
+
+def getDockerProcessesOS():
+    return ''
+
+def getDockerLogsOS():
+    return ''
+
+def getDockerStatsOS():
+    return ''

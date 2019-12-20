@@ -1,5 +1,6 @@
 function callbackFunction(response) {
-    console.log(response)
+    jsonResponseFromApi = response
+        //console.log(response)
     return response
 }
 
