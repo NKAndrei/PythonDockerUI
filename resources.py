@@ -219,6 +219,15 @@ class GetDockerContainerNetwork(Resource):
     def getPorts(self):
         return ''
 
+##TODO ---- docker inspect container
+class InspectDockerContainer(Resource):
+    def __init__(self, **kwargs):
+        self.dockerClient = kwargs['dockerClient']
+    def get(self):
+        return ''
+    def post(self):
+        return ''
+
 ## ---- get a new image from the repo
 class GetNewImage(Resource):
     def get(self):

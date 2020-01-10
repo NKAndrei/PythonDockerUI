@@ -17,6 +17,46 @@ function getSelectedDropValue(dropDownList) {
     selectedContainerName = dropDownList.options[dropDownList.selectedIndex].text;
 }
 
+//TODO ---- define methods
+//TODO ---- create dropdown list containing all of the below 
+//TODO ---- another dropdown list will be populated with the filter options
+//TODO ---- select both and return the result
+function getContainerLogs(PLACEHOLDER) {
+    // ---- gel all logs or get certain information from logs with the given keys
+    // ---- neet to offer a set of given keys
+    // ---- get logs by key
+    // ---- get logs by date/time
+    // ---- get logs by type error/info/warning
+    return ''
+
+}
+
+function getContainerErrors(PLACEHOLDER) {
+    // ---- get all errors
+    // ---- filter as the logs
+    return ''
+}
+
+function getContainerStats(PLACEHOLDER) {
+    // ---- get CPU
+    // ---- memory
+    // ---- HDD
+    return ''
+}
+
+function getContainerProcesses(PLACEHOLDER) {
+    // ---- get list of running processes
+    // ---- get the status of the selected process
+    // ---- get information related to the process ---- port, ip, dir, etc
+    return ''
+}
+
+function filterData(GLOBALVAR, FILTERMETHOD, PLACEHOLDER) {
+    // ---- takes a global variable and filter method(key, date, type etc)
+    // ---- returns result
+    return ''
+}
+
 //TODO ---- get the first name key/value and assign an appropriate variable 
 //TODO ---- can use switch
 // error
