@@ -21,39 +21,55 @@ function getSelectedDropValue(dropDownList) {
 //TODO ---- create dropdown list containing all of the below 
 //TODO ---- another dropdown list will be populated with the filter options
 //TODO ---- select both and return the result
-function getContainerLogs(PLACEHOLDER) {
+function getContainerLogs() {
+    textArea = document.getElementById("temporaryTextArea");
+    textArea.innerHTML = containerLogs;
     // ---- gel all logs or get certain information from logs with the given keys
     // ---- neet to offer a set of given keys
     // ---- get logs by key
     // ---- get logs by date/time
     // ---- get logs by type error/info/warning
     return ''
-
 }
 
-function getContainerErrors(PLACEHOLDER) {
+function getContainerErrors() {
     // ---- get all errors
     // ---- filter as the logs
+    textArea = document.getElementById("temporaryTextArea");
+    textArea.innerHTML = containerError;
     return ''
 }
 
-function getContainerStats(PLACEHOLDER) {
+function getContainerStats() {
     // ---- get CPU
     // ---- memory
     // ---- HDD
+    textArea = document.getElementById("temporaryTextArea");
+    textArea.innerHTML = containerStats;
     return ''
 }
 
-function getContainerProcesses(PLACEHOLDER) {
+function getContainerStatus() {
+    textArea = document.getElementById("temporaryTextAreaStatus");
+    textArea.innerHTML = containerProcesses;
+    // ---- start restart remove stop
+    return ''
+}
+
+function getContainerProcesses() {
     // ---- get list of running processes
     // ---- get the status of the selected process
     // ---- get information related to the process ---- port, ip, dir, etc
+    textArea = document.getElementById("temporaryTextArea");
+    textArea.innerHTML = containerProcesses;
     return ''
 }
 
-function filterData(GLOBALVAR, FILTERMETHOD, PLACEHOLDER) {
+function filterData() {
     // ---- takes a global variable and filter method(key, date, type etc)
     // ---- returns result
+    textArea = document.getElementById("temporaryTextArea");
+    textArea.innerHTML = containerLogs;
     return ''
 }
 
@@ -80,21 +96,16 @@ function parseAPIResponse() {
     console.log("KEY AND JSON OBJECT")
     console.log(jsonObject)
     if (firstKey == "create") {
-        //     // ---- do something
-    }
-    // else if(firstKey == "stop"){
-    //     // ---- do something
-    // }
-    // else if(firstKey == "remove"){
-    //     // ---- do something
-    // }
-    // else if(firstKey == "start"){
-    //     // ---- do something
-    // }
-    // else if(firstKey == "restart"){
-    //     // ---- do something
-    // }
-    else if (firstKey == "name") {
+        containerCrete = jsonObject
+    } else if (firstKey == "stop") {
+        containerStop = jsonObject
+    } else if (firstKey == "remove") {
+        containerRemove = jsonObject
+    } else if (firstKey == "start") { // ---- the rest of these variables will be temporary based on the action on the containers from the name
+        containerStart = jsonObject
+    } else if (firstKey == "restart") {
+        containerRestart = jsonObject
+    } else if (firstKey == "name") { // ---- this variable will contain all container name
         listOfNames = []
         listOfNames = loopThroughJsonObject(keys, jsonObject);
         containerNames = listOfNames

@@ -17,11 +17,7 @@
         <!-- TODO must define a bettet/intuitive interface-->
         <!-- Get all containers and list them each with their own buttons and resources/information -->
         <!-- Such as stats, running processes, names, id, networks and ports -->
-        <select name="containerImages" id="dockerContainerNames" onChange="getSelectedDropValue(this);">
-        </select>
-        <button onclick="getContainerNames()">Add To List</button>
-        <button onclick="getSelectedDropValue()">Shoe current option</button>
-        <br>
+        
         <input type='text' name='textInput' id='imageName'>
         <button onclick="manipulateContainer('createContainer')">Spin up container</button>
         <button onclick="manipulateContainer('stopContainer')">Stop container</button>
@@ -34,12 +30,18 @@
         <button onclick="manipulateContainer('getContainerLogs')">Get container Logs</button>
         <button onclick="manipulateContainer('getContainerStats')">Get container Stats</button>
         <br>
+        <!--Need to Debug-->>
         <input type='text' name='textInput' id='containerProcess'>
         <button onclick="getDockerProcess('getProcessStatus')">Get process status</button>
 
-
-
-
+        <div class="form-group">
+            <label for="dockerContainerNames">Select container name</label>
+            <select class="form-control" name="containerImages" id="dockerContainerNames" onChange="getSelectedDropValue(this);">
+            </select>
+        </div>
+        <button onclick="getContainerNames()">Add To List</button>
+        <button onclick="getSelectedDropValue()">Shoe current option</button>
+        <!-- get names of running containers -->
         {{ world }}
     </body>
 </html>
