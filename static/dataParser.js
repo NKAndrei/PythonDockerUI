@@ -6,7 +6,7 @@ function getContainerNames() {
     console.log(containerList)
     for (i = 0; i < containerList.length; i++) {
         var selectOption = document.createElement("option");
-        selectOption.appendChild(document.createTextNode(containerList[i]))
+        selectOption.appendChild(document.createTextNode(containerList[i])) // ---- needs to be modified to remove text nodes
         selectOption.setAttribute("value", containerList[i])
         containerListElement.appendChild(selectOption);
     }
@@ -15,6 +15,7 @@ function getContainerNames() {
 // ---- get the selected value from the dropdown list and assign it to a global variable
 function getSelectedDropValue(dropDownList) {
     selectedContainerName = dropDownList.options[dropDownList.selectedIndex].text;
+    console.log(selectedContainerName)
 }
 
 //TODO ---- define methods
@@ -108,8 +109,10 @@ function parseAPIResponse() {
     } else if (firstKey == "name") { // ---- this variable will contain all container name
         listOfNames = []
         listOfNames = loopThroughJsonObject(keys, jsonObject);
+        containerNames = ""
         containerNames = listOfNames
         console.log(containerNames)
+        getContainerNames();
     } else if (firstKey == "logs") {
         containerLogs = jsonObject
     } else if (firstKey == "processes") {
@@ -128,6 +131,7 @@ function loopThroughJsonObject(key, jsonObject) {
     var result = [];
     for (item in jsonObject[key[1]]) {
         result.push(jsonObject[key[1]][item])
+            //TODO ---- modify this to return the names instead of container id
     }
     return result;
 }
