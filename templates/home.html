@@ -1,14 +1,66 @@
 <html>
     <head>
+        <!-- Bootstrap support -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <!-- Bootstrap support -->
+
+        <!-- Javascript files -->
         <script src="./../static/manipulateContainer.js"></script>
         <script src="./../static/getDockerData.js"></script>
+        <script src="./../static/dataParser.js"></script
+        <!-- Javascript files -->
     <head>
 
     <body>
-        <input type='text' name='textInput' id='imageName'>
-        <button onclick="manipulateContainer('createContainer')">Spin up container</button>
-        <button onclick="manipulateContainer('stopContainer')">Stop container</button>
-        <button onclick="getDockerData('getAllContainers')">GetAllData</button>
+        <!-- TODO must define a better/intuitive interface-->
+        <!-- Get all containers and list them each with their own buttons and resources/information -->
+        <!-- Such as stats, running processes, names, id, networks and ports -->
+        <div class="form-group">
+            <input class="form-control" type='text' name='textInput' id='imageName'>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="manipulateContainer('createContainer')">Spin up container</button>
+                <button class="btn btn-primary">Download Image</button>
+                <button class="btn btn-danger">Remove Image</button>
+            </div>
+            <br>
+        </div>
+        
+        <div class="form-group">
+            <label for="dockerContainerNames">Select container name</label>
+            <select class="form-control" name="containerImages" id="dockerContainerNames" onChange="getSelectedDropValue(this);">
+            </select>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="getDockerData('getAllContainers')">Update Container List</button>
+                <button class="btn btn-primary" onclick="manipulateContainer('startContainer')">Start container</button>
+                <button class="btn btn-warning" onclick="manipulateContainer('restartContainer')">Restart container</button>
+                <button class="btn btn-danger" onclick="manipulateContainer('stopContainer')">Stop container</button>
+                <button class="btn btn-danger" onclick="manipulateContainer('removeContainer')">Remove container</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="nav nav-pills nav-stacked anyClass">
+                <p class="bg-info" id="infoParagraph"></p>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="manipulateContainer('getContainerProcesses')">Get container processes</button>
+                <button class="btn btn-primary" onclick="manipulateContainer('getContainerLogs')">Get container Logs</button>
+                <button class="btn btn-primary" onclick="manipulateContainer('getContainerStats')">Get container Stats</button>
+            </div>
+        </div>
+
+        <!--Need to Debug-->>
+        <div class="form-group">
+            <div class="nav nav-pills nav-stacked anyClass">
+                <p class="bg-info" id="infoParagraph"></p>
+            </div>
+            <input clsss="form-control" type='text' name='textInput' id='containerProcess'>
+            <button class="brn btn-primary" onclick="getDockerProcess('getProcessStatus')">Get process status</button>
+        </div>
+           
+        <!-- get names of running containers -->
         {{ world }}
     </body>
 </html>
