@@ -5,100 +5,100 @@ import docker
 ##TODO ---- refactor or create extra docker methos that are executed through subprocess and os
 
 #! -- a series of commmands defined for testing purposes
-def terminalCommands(): 
+def terminal_commands(): 
     print("lala")
-    pyCommand = subprocess.run(["ls", "-al"], stdout=subprocess.PIPE)
-    print(pyCommand.stdout.decode())
-    pyCommand2 = subprocess.run(["grep", "la"], input=pyCommand.stdout, stdout=subprocess.PIPE)
-    print(pyCommand2.stdout.decode())
+    py_command = subprocess.run(["ls", "-al"], stdout=subprocess.PIPE)
+    print(py_command.stdout.decode())
+    py_command_2 = subprocess.run(["grep", "la"], input=py_command.stdout, stdout=subprocess.PIPE)
+    print(py_command_2.stdout.decode())
     print('olla2')
 
-def terminalDockerCommands():
-    dockerCommand1 = subprocess.run(["docker", "ps"], stdout=subprocess.PIPE)
-    print(dockerCommand1.stdout.decode())
-    dockerCommand2 = subprocess.run(["docker", "pull", "hello-world"], stdout=subprocess.PIPE)
-    print(dockerCommand2.stdout.decode())
-    dockerCommand3 = subprocess.run(["docker", "images"], stdout=subprocess.PIPE)
-    print(dockerCommand3.stdout.decode())
-    dockerCommand4 = subprocess.run(["grep", "latest"], input=dockerCommand3.stdout, stdout=subprocess.PIPE)
-    print(dockerCommand4.stdout.decode())
-    print(dockerCommand4.stdout)
+def terminal_docker_commands():
+    docker_command_1 = subprocess.run(["docker", "ps"], stdout=subprocess.PIPE)
+    print(docker_command_1.stdout.decode())
+    docker_command_2 = subprocess.run(["docker", "pull", "hello-world"], stdout=subprocess.PIPE)
+    print(docker_command_2.stdout.decode())
+    docker_command_3 = subprocess.run(["docker", "images"], stdout=subprocess.PIPE)
+    print(docker_command_3.stdout.decode())
+    docker_command_4 = subprocess.run(["grep", "latest"], input=docker_command_3.stdout, stdout=subprocess.PIPE)
+    print(docker_command_4.stdout.decode())
+    print(docker_command_4.stdout)
 
-def otherCommands(filename):
+def other_commands(filename):
 
-    fileName = filename
-    pyCommand = subprocess.run(["cat", fileName], stdout=subprocess.PIPE)
-    fileContents = pyCommand.stdout.decode()
-    print(fileContents)
+    file_name = filename
+    py_command = subprocess.run(["cat", file_name], stdout=subprocess.PIPE)
+    file_contents = py_command.stdout.decode()
+    print(file_contents)
     return "ok"
 #! -- a series of commmands defined for testing purposes
 
 
 ##TODO ---- need to refactor the names of the methods to be more intuitive
-def getDockerClient():
-    dockerClient = docker.from_env()
-    return dockerClient
+def get_docker_client():
+    docker_client = docker.from_env()
+    return docker_client
 
-def listDockerImages(dockerClient):
-    imageList = dockerClient.images.list(all=True)
-    return imageList
+def list_docker_images(docker_client):
+    image_list = docker_client.images.list(all=True)
+    return image_list
 
-def listDockerContainer(dockerClient):
-    containerList = dockerClient.containers.list(all=True)
-    return containerList
+def list_docker_containers(docker_client):
+    container_list = docker_client.containers.list(all=True)
+    return container_list
 
-def getDockerContainerName(containerConnection):
-    name = containerConnection.attrs['Name']
+def get_docker_container_name(container_connection):
+    name = container_connection.attrs['Name']
     return name                                           #TODO -- need to implement
     
-def runDockerContainer(dockerClient, dockerImageName, detachContainer, commands=None):
+def run_docker_container(docker_client, docker_image_name, detach_container, commands=None):
     if commands != '':
-        container = dockerClient.containers.run(dockerImageName, detach=detachContainer, command=commands)
+        container = docker_client.containers.run(docker_image_name, detach=detach_container, command=commands)
         return container
     else:
-        container = dockerClient.containers.run(dockerImageName, detach=detachContainer)
+        container = docker_client.containers.run(docker_image_name, detach=detach_container)
         return container
 
 ##TODO ---- the start/stop/remove container methods can be grouped into one with conditionals
-def startDockerContainer(containerConnection):
-    return containerConnection.start()
+def start_docker_container(container_connection):
+    return container_connection.start()
 
-def stopDockerContainer(containerConnection):
-    return containerConnection.stop()
+def stop_docker_container(container_connection):
+    return container_connection.stop()
 
-def removeDockerContainer(containerConnection):
-    return containerConnection.remove()
+def remove_docker_container(container_connection):
+    return container_connection.remove()
 
-def restartDockerContainer(containerConnection, time=None):
+def restart_docker_container(container_connection, time=None):
     if time is None:
-        containerRestart = containerConnection.restart()
+        container_restart = container_connection.restart()
     else:
-        containerRestart = containerConnection.restart(time=time)
-    return containerRestart
+        container_restart = container_connection.restart(time=time)
+    return container_restart
 
-def getDockerContainer(dockerClient, containerID):
-    containerObject = dockerClient.containers.get(containerID)
-    return containerObject
+def get_docker_container(docker_client, containder_id):
+    container_object = docker_client.containers.get(containder_id)
+    return container_object
 
-def getDockerContainerInfo(containerConnection):
-    containerInfo = containerConnection.attrs
-    return containerInfo
+def get_docker_container_info(container_connection):
+    container_info = container_connection.attrs
+    return container_info
 
-def executeCommandInContainer(containerConnection, command):
-    response = containerConnection.exec_run(command, stream=False, demux=False)
+def execute_command_in_container(container_connection, command):
+    response = container_connection.exec_run(command, stream=False, demux=False)
     return response.output
 
-def getDockerProcesses(containerConnection):
-    dockerProcesses = containerConnection.top()
-    return dockerProcesses
+def get_docker_processes(container_connection):
+    docker_processes = container_connection.top()
+    return docker_processes
 
-def getDockerLogs(containerConnection):
-    dockerLogs = containerConnection.logs()
-    return dockerLogs
+def get_docker_logs(container_connection):
+    docker_logs = container_connection.logs()
+    return docker_logs
 
-def getDockerStats(containerConnection, stream=None):
+def get_docker_stats(container_connection, stream=None):
     if stream is None:
-        dockerStats = containerConnection.stats(stream=False)
+        docker_stats = container_connection.stats(stream=False)
     else:
-        dockerStats = containerConnection.stats(stream = stream)
-    return dockerStats
+        docker_stats = container_connection.stats(stream = stream)
+    return docker_stats
