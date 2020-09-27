@@ -1,11 +1,13 @@
 from flask import Flask, redirect, request, render_template
 from flask_restful import Resource, Api
+from flask_cors import CORS
 from python_docker_methods import get_docker_client, list_docker_images
 from resources import CreateContainer, GetAllContainers, StopContainer, RemoveContainer, StartContainer, GetContainerProcesses, GetContainerLogs, GetContainerStats, RestartContainer, GetDockerContainerProcessStatus
 
 
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 
@@ -14,7 +16,9 @@ api = Api(app)
 docker_client = get_docker_client()
 
 
-
+@app.route('/')
+def redirect_home():
+    return redirect('/home',302)
 @app.route('/home')
 def home():
     image = list_docker_images(docker_client)
