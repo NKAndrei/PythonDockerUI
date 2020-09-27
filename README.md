@@ -8,6 +8,7 @@ Technologies used:
  - docker sdk
  - javascript
  - jinja templates
+ - bootstrap for html
 
 The project is divided into modules each with a specific task:
  - main_flask - module is the entry point of the project.
