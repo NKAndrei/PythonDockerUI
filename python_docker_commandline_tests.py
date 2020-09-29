@@ -1,4 +1,4 @@
-from python_docker_methods import terminal_commands, get_docker_client,list_docker_images, run_docker_container, list_docker_containers, stop_docker_container, get_docker_container, execute_command_in_container, remove_docker_container, listDockerImagesOS
+from python_docker_methods import terminal_commands, get_docker_client,list_docker_images, run_docker_container, list_docker_containers, stop_docker_container, get_docker_container, execute_command_in_container, remove_docker_container, get_docker_processes
 import re
 import time
 import pprint
@@ -59,10 +59,12 @@ def tests1():
     containerCommandExecution = execute_command_in_container(container_connection, cmd)
     print(containerCommandExecution)
     print("EXECUTING COMMAND")
+    container_processes = get_docker_processes(container_connection)
+    print("RUNNING PROCESSES ARE")
+    print(container_processes)
     ## ---- stop, remove and check if the docker container has been removed
     stopContainer = stop_docker_container(container_connection)
     removeContainer = remove_docker_container(container_connection)
     list_docker_containers(docker_client)
     ##print(stopContainer)
-
-listDockerImagesOS()
+tests1()

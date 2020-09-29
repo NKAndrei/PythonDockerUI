@@ -9,20 +9,22 @@
         <!-- Javascript files -->
         <script src="./../static/manipulateContainer.js"></script>
         <script src="./../static/getDockerData.js"></script>
-        <script src="./../static/dataParser.js"></script
+        <script src="./../static/dataParser.js"></script>
         <!-- Javascript files -->
-    <head>
+    </head>
 
     <body>
         <!-- TODO must define a better/intuitive interface-->
         <!-- Get all containers and list them each with their own buttons and resources/information -->
         <!-- Such as stats, running processes, names, id, networks and ports -->
+        
+        <!--Make this into a list -->
         <div class="form-group">
             <input class="form-control" type='text' name='textInput' id='imageName'>
             <div class="btn-group">
-                <button class="btn btn-primary" onclick="manipulateContainer('createContainer')">Spin up container</button>
                 <button class="btn btn-primary">Download Image</button>
                 <button class="btn btn-danger">Remove Image</button>
+                <button class="btn btn-primary" onclick="manipulateContainer('createContainer')">Spin up container</button>
             </div>
             <br>
         </div>
@@ -40,6 +42,7 @@
             </div>
         </div>
 
+        <!-- Need a container list here as well, make the list auto update -->
         <div class="form-group">
             <div class="nav nav-pills nav-stacked anyClass">
                 <p class="bg-info" id="infoParagraph"></p>
