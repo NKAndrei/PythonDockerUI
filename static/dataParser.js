@@ -2,13 +2,24 @@
 function getContainerNames() {
     var containerListElement = document.getElementById("dockerContainerNames");
     var containerList = containerNames;
-    console.log("Getting container names")
-    console.log(containerList)
-    for (i = 0; i < containerList.length; i++) {
+    if(containerListElement.options.length <1){
         var selectOption = document.createElement("option");
-        selectOption.appendChild(document.createTextNode(containerList[i])) // ---- needs to be modified to remove text nodes
-        selectOption.setAttribute("value", containerList[i])
+        selectOption.appendChild(document.createTextNode(containerList[1])) // ---- needs to be modified to remove text nodes
+        selectOption.setAttribute("value", containerList[1])
         containerListElement.appendChild(selectOption);
+    }
+    for (i = 0; i < containerList.length; i++) {
+        for (x = 0; x < containerListElement.options.length; x++) {
+            if(containerListElement.options[x].value == containerList[i]){
+                break;
+            }
+            else if(x == containerListElement.options.length -1) {
+                var selectOption = document.createElement("option");
+                selectOption.appendChild(document.createTextNode(containerList[i])) // ---- needs to be modified to remove text nodes
+                selectOption.setAttribute("value", containerList[i])
+                containerListElement.appendChild(selectOption);
+            }
+        }
     }
 }
 
