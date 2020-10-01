@@ -1,4 +1,4 @@
-from python_docker_methods import terminal_commands, get_docker_client,list_docker_images, run_docker_container, list_docker_containers, stop_docker_container, get_docker_container, execute_command_in_container, remove_docker_container, get_docker_processes
+from python_docker_methods import terminal_commands, get_docker_client,list_docker_images, run_docker_container, list_docker_containers, stop_docker_container, get_docker_container, execute_command_in_container, remove_docker_container, get_docker_processes, pull_docker_image
 import re
 import time
 import pprint
@@ -11,7 +11,9 @@ def tests1():
     ## ---- pull and list the downloaded docker image##TODO ---- need to define the following methods
 
     docker_client = get_docker_client()
+    pull_docker_image(docker_client, "httpd")
     dockerImages = list_docker_images(docker_client)
+    print("printing images")
     print(dockerImages)
 
     ## ---- get docker image name and spin up a container

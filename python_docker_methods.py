@@ -39,6 +39,10 @@ def get_docker_client():
     docker_client = docker.from_env()
     return docker_client
 
+def pull_docker_image(docker_client, image_name):
+    docker_image_name = docker_client.images.pull(image_name, "latest")
+    return docker_image_name
+
 def list_docker_images(docker_client):
     image_list = docker_client.images.list(all=True)
     return image_list

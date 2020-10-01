@@ -216,6 +216,15 @@ class GetDockerContainerProcessStatus(Resource):
 
 
 
+##TODO ---- Pull docker images
+class PullDockerImage(Resource):
+    def __init__(self, **kwargs):
+        self.docker_client = kwargs['docker_client']
+        self.docker_image_name = kwargs['docker_image_name']
+    def get(self):
+        return ''
+    def post(self):
+        return ''
 
 ##TODO ---- return the container network type, name and used ports, ip
 class GetDockerContainerNetwork(Resource):
