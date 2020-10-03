@@ -105,8 +105,6 @@ function parseAPIResponse() {
     var jsonObject = JSON.parse(jsonResponseFromApi);
     var keys = Object.keys(jsonObject)
     var firstKey = jsonObject[keys[0]]
-    console.log("KEY AND JSON OBJECT")
-    console.log(jsonObject)
     if (firstKey == "create") {
         containerCrete = jsonObject
     } else if (firstKey == "stop") {
@@ -132,6 +130,8 @@ function parseAPIResponse() {
         containerStats = jsonObject
     } else if (firstKey == "error") {
         containerError = jsonObject
+    }else{
+        console.log(jsonObject);
     }
     return "";
 }

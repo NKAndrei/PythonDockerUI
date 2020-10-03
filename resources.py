@@ -220,12 +220,24 @@ class GetDockerContainerProcessStatus(Resource):
 class PullDockerImage(Resource):
     def __init__(self, **kwargs):
         self.docker_client = kwargs['docker_client']
-        self.docker_image_name = kwargs['docker_image_name']
+        ##self.docker_image_name = kwargs['docker_image_name']
     def get(self):
         return ''
     def post(self):
-        return ''
+        image_data = request.get_json(True)
+        image_name = image_data['name']
+        docker_image = python_docker_methods.pull_docker_image(self.docker_client, image_name)
+        return {"Pulled Image" : str(docker_image)}
 
+## ---- get all available image names
+class GetAllImages(Resource):
+    def __init__(self, **kwargs):
+        self.docker_client = kwargs["docker_client"]
+    def get(self):
+        image_list = []
+        image_list = python_docker_methods.list_docker_images(self.docker_client)
+        return parser.parse_elements_to_response("name", image_list ,"Returned image names")
+        
 ##TODO ---- return the container network type, name and used ports, ip
 class GetDockerContainerNetwork(Resource):
     def __init__(self, **kwargs):
@@ -246,14 +258,4 @@ class InspectDockerContainer(Resource):
     def get(self):
         return ''
     def post(self):
-        return ''
-
-## ---- get a new image from the repo
-class GetNewImage(Resource):
-    def get(self):
-        return ''
-
-## ---- get all available image names
-class GetAllImages(Resource):
-    def get(self):
         return ''
