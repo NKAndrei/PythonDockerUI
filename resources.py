@@ -5,6 +5,7 @@ from flask_restful import Resource, Api
 import python_docker_methods
 import parser
 import json
+import random
 
 
 
@@ -224,9 +225,9 @@ class PullDockerImage(Resource):
     def get(self):
         return ''
     def post(self):
-        image_data = request.get_json(True)
-        image_name = image_data['name']
-        docker_image = python_docker_methods.pull_docker_image(self.docker_client, image_name)
+        image_data      = request.get_json(True)
+        image_name      = image_data['name']
+        docker_image    = python_docker_methods.pull_docker_image(self.docker_client, image_name)
         return {"Pulled Image" : str(docker_image)}
 
 ## ---- get all available image names
@@ -234,8 +235,17 @@ class GetAllImages(Resource):
     def __init__(self, **kwargs):
         self.docker_client = kwargs["docker_client"]
     def get(self):
-        image_list = []
-        image_list = python_docker_methods.list_docker_images(self.docker_client)
+        image_list      = "{"
+        id_number       = 0
+        raw_image_list  = python_docker_methods.list_docker_images(self.docker_client)
+        
+        for item in range(len(raw_image_list)):
+            n           = random.randint(1,30)
+            id_number   = id_number + n
+            image_name  = parser.parse_image_name(str(raw_image_list[item]))
+            image_list  = image_list + "\"" + str(id_number) + "\"" + ":" + "\"" + str(image_name) + "\"" + ","
+        
+        image_list = image_list.rstrip(',') + "}"
         return parser.parse_elements_to_response("name", image_list ,"Returned image names")
         
 ##TODO ---- return the container network type, name and used ports, ip

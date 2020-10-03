@@ -2,7 +2,7 @@ from flask import Flask, redirect, request, render_template
 from flask_restful import Resource, Api
 from flask_cors import CORS
 from python_docker_methods import get_docker_client, list_docker_images
-from resources import CreateContainer, GetAllContainers, StopContainer, RemoveContainer, StartContainer, GetContainerProcesses, GetContainerLogs, GetContainerStats, RestartContainer, GetDockerContainerProcessStatus, PullDockerImage
+from resources import CreateContainer, GetAllContainers, StopContainer, RemoveContainer, StartContainer, GetContainerProcesses, GetContainerLogs, GetContainerStats, RestartContainer, GetDockerContainerProcessStatus, PullDockerImage, GetAllImages
 
 
 
@@ -37,6 +37,7 @@ api.add_resource(GetContainerLogs, '/getContainerLogs', resource_class_kwargs={'
 api.add_resource(GetContainerStats, '/getContainerStats', resource_class_kwargs={'docker_client' : docker_client})
 api.add_resource(GetDockerContainerProcessStatus, '/getProcessStatus', resource_class_kwargs={'docker_client' : docker_client})
 api.add_resource(PullDockerImage, '/pullDockerImage', resource_class_kwargs={'docker_client' : docker_client})
+api.add_resource(GetAllImages, '/getAllImages', resource_class_kwargs={'docker_client' : docker_client})
 
 
 

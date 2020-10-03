@@ -38,6 +38,7 @@
                 <select class="form-control" name="imageNames" id="dockerImageNames" onChange="getSelectedDropValue(this);">
                 </select>
                 <div class="btn-group">
+                    <button class="btn btn-primary" onclick="getDockerData('getAllImages','dockerImageNames')">List all images</button>
                     <button class="btn btn-danger">Remove Image</button>
                     <button class="btn btn-primary" onclick="manipulateContainer('createContainer')">Spin up container</button>
                 </div>
@@ -50,7 +51,7 @@
             <select class="form-control" name="containerImages" id="dockerContainerNames" onChange="getSelectedDropValue(this);">
             </select>
             <div class="btn-group">
-                <button class="btn btn-primary" onclick="getDockerData('getAllContainers')">Update Container List</button>
+                <button class="btn btn-primary" onclick="getDockerData('getAllContainers','dockerContainerNames')">Update Container List</button>
                 <button class="btn btn-primary" onclick="manipulateContainer('startContainer')">Start container</button>
                 <button class="btn btn-warning" onclick="manipulateContainer('restartContainer')">Restart container</button>
                 <button class="btn btn-danger" onclick="manipulateContainer('stopContainer')">Stop container</button>

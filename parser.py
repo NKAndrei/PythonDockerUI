@@ -4,7 +4,8 @@ import re
 import json
 
 def parse_image_name(image_name):
-    return re.search('\'(.+?)\'',image_name)
+    match = re.search('\'(.+?)\'',image_name).group()
+    return match
 
 def parse_container_id(containder_id):
     trimmedContainerList = re.search(': (.+?)>', str(containder_id)).group().replace(":","").replace(">","").replace(" ","")

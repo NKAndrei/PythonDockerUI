@@ -1,6 +1,6 @@
 // ---- get container names from api and populate the dropdown list
-function getContainerNames() {
-    var containerListElement = document.getElementById("dockerContainerNames");
+function getContainerNames(type) {
+    var containerListElement = document.getElementById(type);
     var containerList = containerNames;
     if(containerListElement.options.length <1){
         var selectOption = document.createElement("option");
@@ -101,10 +101,11 @@ function filterData() {
 // ---- need to create variable dynamically according to the number of keys and names from api
 // ---- create the simple method first
 // ---- rename the method
-function parseAPIResponse() {
+function parseAPIResponse(type) {
     var jsonObject = JSON.parse(jsonResponseFromApi);
     var keys = Object.keys(jsonObject)
     var firstKey = jsonObject[keys[0]]
+    console.log(jsonObject);
     if (firstKey == "create") {
         containerCrete = jsonObject
     } else if (firstKey == "stop") {
@@ -121,7 +122,7 @@ function parseAPIResponse() {
         containerNames = ""
         containerNames = listOfNames
         console.log(containerNames)
-        getContainerNames();
+        getContainerNames(type);
     } else if (firstKey == "logs") {
         containerLogs = jsonObject
     } else if (firstKey == "processes") {

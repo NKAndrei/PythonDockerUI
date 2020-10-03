@@ -1,18 +1,19 @@
-function callbackFunction(response) {
+//type image, container
+function callbackFunction(response, type) {
     jsonResponseFromApi = response
-    parseAPIResponse() // ---- added 
+    parseAPIResponse(type) // ---- added 
         //console.log(response)
     return response;
 }
 //TODO ---- will need to split this asynchronous request into multiple parts
 //TODO ---- and add a timer to be able to refresh the container data automatically
 // ---- get name, id, status, a
-function getDockerData(dataEndpoint) {
+function getDockerData(dataEndpoint, type) {
     var urlAddress = "http://127.0.0.1:5000/" + dataEndpoint;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            callbackFunction(xhttp.responseText);
+            callbackFunction(xhttp.responseText, type);
         }
     }
     xhttp.open('GET', urlAddress);
