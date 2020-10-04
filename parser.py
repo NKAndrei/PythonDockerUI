@@ -5,6 +5,7 @@ import json
 
 def parse_image_name(image_name):
     match = re.search('\'(.+?)\'',image_name).group()
+    match = match.rstrip('\'').lstrip('\'')
     return match
 
 def parse_container_id(containder_id):

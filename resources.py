@@ -248,6 +248,15 @@ class GetAllImages(Resource):
         image_list = image_list.rstrip(',') + "}"
         return parser.parse_elements_to_response("name", image_list ,"Returned image names")
         
+class RemoveDockerImage(Resource):
+    def __init__(self, **kwargs):
+        self.docker_client = kwargs["docker_client"]
+    def post(self):
+        image_data      = request.get_json(True)
+        image_name      = image_data['name']
+        docker_image    = python_docker_methods.remove_docker_image(self.docker_client, image_name)
+        return {"Removed Image" : str(docker_image)}
+
 ##TODO ---- return the container network type, name and used ports, ip
 class GetDockerContainerNetwork(Resource):
     def __init__(self, **kwargs):

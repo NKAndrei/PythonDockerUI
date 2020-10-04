@@ -23,6 +23,7 @@ function pullDockerImage(dataEndpoint) {
     var urlAddress = "http://127.0.0.1:5000/" + dataEndpoint;
     var xhttp = new XMLHttpRequest();
     var imageName = document.getElementById("imageName").value;
+    
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             callbackFunction(xhttp.responseText);
@@ -33,6 +34,24 @@ function pullDockerImage(dataEndpoint) {
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(containerJson);
 }
+
+function removeDockerImage(dataEndpoint) {
+    var urlAddress = "http://127.0.0.1:5000/" + dataEndpoint;
+    var xhttp = new XMLHttpRequest();
+    //var imageName = document.getElementById("imageName").value;
+    var imageName = selectedContainerName;
+    
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            callbackFunction(xhttp.responseText);
+        }
+    }
+    containerJson = "{" + "\"name\"" + ":" + "\"" + imageName + "\"" + "}"
+    xhttp.open('POST', urlAddress, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(containerJson);
+}
+
 
 function getDockerProcess(dockerCommand) {
     var xhttp = new XMLHttpRequest();

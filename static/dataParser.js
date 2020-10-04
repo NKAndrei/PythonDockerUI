@@ -2,24 +2,16 @@
 function getContainerNames(type) {
     var containerListElement = document.getElementById(type);
     var containerList = containerNames;
-    if(containerListElement.options.length <1){
-        var selectOption = document.createElement("option");
-        selectOption.appendChild(document.createTextNode(containerList[1])) // ---- needs to be modified to remove text nodes
-        selectOption.setAttribute("value", containerList[1])
-        containerListElement.appendChild(selectOption);
+    if(containerListElement.options.length > 0){
+        for(i = containerListElement.options.length; i >= 0 ; i--){
+            containerListElement.remove(i)
+        }
     }
     for (i = 0; i < containerList.length; i++) {
-        for (x = 0; x < containerListElement.options.length; x++) {
-            if(containerListElement.options[x].value == containerList[i]){
-                break;
-            }
-            else if(x == containerListElement.options.length -1) {
-                var selectOption = document.createElement("option");
-                selectOption.appendChild(document.createTextNode(containerList[i])) // ---- needs to be modified to remove text nodes
-                selectOption.setAttribute("value", containerList[i])
-                containerListElement.appendChild(selectOption);
-            }
-        }
+        var selectOption = document.createElement("option");
+        selectOption.appendChild(document.createTextNode(containerList[i]))
+        selectOption.setAttribute("value", containerList[i])
+        containerListElement.appendChild(selectOption);
     }
 }
 
@@ -105,7 +97,6 @@ function parseAPIResponse(type) {
     var jsonObject = JSON.parse(jsonResponseFromApi);
     var keys = Object.keys(jsonObject)
     var firstKey = jsonObject[keys[0]]
-    console.log(jsonObject);
     if (firstKey == "create") {
         containerCrete = jsonObject
     } else if (firstKey == "stop") {

@@ -1,4 +1,4 @@
-from python_docker_methods import terminal_commands, get_docker_client,list_docker_images, run_docker_container, list_docker_containers, stop_docker_container, get_docker_container, execute_command_in_container, remove_docker_container, get_docker_processes, pull_docker_image
+from python_docker_methods import terminal_commands, get_docker_client,list_docker_images, run_docker_container, list_docker_containers, stop_docker_container, get_docker_container, execute_command_in_container, remove_docker_container, get_docker_processes, pull_docker_image, remove_docker_image
 import re
 import time
 import pprint

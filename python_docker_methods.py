@@ -43,6 +43,10 @@ def pull_docker_image(docker_client, image_name):
     docker_image_name = docker_client.images.pull(image_name, "latest")
     return docker_image_name
 
+def remove_docker_image(docker_client, image_name):
+    docker_image_name = docker_client.images.remove(image_name, "latest")
+    return docker_image_name
+
 def list_docker_images(docker_client):
     image_list = docker_client.images.list(all=True)
     return image_list
